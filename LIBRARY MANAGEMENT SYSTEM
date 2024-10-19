@@ -1,0 +1,179 @@
+1. LIBRARY MANAGEMENT SYSTEM 
+
+1.1 Login( username, password)
+Pseudocode:
+Login(username, password):
+    user = searchUserDatabase(username)
+    if user is not null:
+        if user.password == password:
+            return "Login successful"
+        else:
+            return "Incorrect password"
+    else:
+        return "Username not found"
+
+1.2 Register(username, password, userType)
+Pseudocode:
+Register(username, password, userType):
+    if searchUserDatabase(username) is not null:
+        return "Username already exists"
+    else:
+        insertUser(username, password, userType)
+        return "Registration successful"
+
+1.3 Logout()
+Pseudocode:
+Logout():
+    if currentUser is not null:
+        clearSession()
+        currentUser = null
+        return "Logout successful"
+    else:
+        return "No user is currently logged in"
+
+2. USER CLASS
+
+2.1 Verify()
+Pseudocode:
+Verify(ID):
+    if searchUserDatabase(ID) is not null:
+        return "Verification successful"
+    else:
+        return "Invalid ID"
+
+2.2 CheckAccount(userID)
+Pseudocode:
+CheckAccount(userID):
+    account = searchAccountDatabase(userID)
+    if account is not null:
+        return account
+    else:
+        return "Account not found"
+
+2.3 get_book_info(bookID)
+Pseudocode:
+get_book_info(bookID):
+    book = searchLibraryDatabase(bookID)
+    if book is not null:
+        return book
+    else:
+        return "Book not found"
+
+3. ACCOUNT
+
+3.1 Calculate_fine(userID)
+Pseudocode:
+Calculate_fine(userID):
+    account = searchAccountDatabase(userID)
+    fine = 0
+    for each book in account.borrowed_books:
+        if currentDate > book.dueDate:
+            fine += calculateFineForBook(book)
+    return fine
+
+4. BOOK
+
+4.1 Show_duedt(bookID)
+Pseudocode:
+Show_duedt(bookID):
+    book = searchLibraryDatabase(bookID)
+    if book is not null:
+        return book.dueDate
+    else:
+        return "Book not found"
+
+4.2 Reservation_status(bookID)
+Pseudocode:
+Reservation_status(bookID):
+    book = searchLibraryDatabase(bookID)
+    if book is not null:
+        return book.reservationStatus
+    else:
+        return "Book not found"
+
+4.3 Feedback(bookID, feedback)
+Pseudocode:
+Feedback(bookID, feedback):
+    book = searchLibraryDatabase(bookID)
+    if book is not null:
+        book.addFeedback(feedback)
+        return "Feedback added"
+    else:
+        return "Book not found"
+
+4.4 Book_request(userID, bookID)
+Pseudocode:
+Book_request(userID, bookID):
+    book = searchLibraryDatabase(bookID)
+    if book is available:
+        reserveBook(userID, bookID)
+        return "Book requested"
+    else:
+        return "Book not available"
+
+4.5 Renw_info(bookID)
+Pseudocode:
+Renw_info(bookID):
+    book = searchLibraryDatabase(bookID)
+    if book is not null:
+        extendDueDate(book)
+        return "Book renewed"
+    else:
+        return "Book not found"
+
+5. LIBRARIAN 
+
+5.1 Verify_librarian(librarianID)
+Pseudocode:
+Verify_librarian(librarianID):
+    librarian = searchLibrarianDatabase(librarianID)
+    if librarian is not null:
+        return "Librarian verified"
+    else:
+        return "Librarian not found"
+
+5.2.Search(searchString)
+Pseudocode:
+Search(searchString):
+    results = searchLibraryDatabaseByKeyword(searchString)
+    return results
+
+6. LIBRARY DATABASE
+
+6.1 Add(bookDetails)
+Pseudocode:
+Add(bookDetails):
+    insertBookIntoDatabase(bookDetails)
+    return "Book added"
+
+6.2 Delete(bookID)
+Pseudocode:
+Delete(bookID):
+    book = searchLibraryDatabase(bookID)
+    if book is not null:
+        removeBookFromDatabase(bookID)
+        return "Book deleted"
+    else:
+        return "Book not found"
+
+6.3 Update(bookID, newDetails)
+Pseudocode:
+Update(bookID, newDetails):
+    book = searchLibraryDatabase(bookID)
+    if book is not null:
+        updateBookDetails(bookID, newDetails)
+        return "Book updated"
+    else:
+        return "Book not found"
+
+6.4 Display()
+Pseudocode:
+Display():
+    books = getAllBooksFromDatabase()
+    return books
+
+6.5 Search(searchString)
+Pseudocode:
+Search(searchString):
+    results = searchLibraryDatabaseByKeyword(searchString)
+    return results
